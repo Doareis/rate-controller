@@ -1,27 +1,28 @@
 package com.dreis.rateestimatemanager.controller;
 
 import com.dreis.rateestimatemanager.entity.Rate;
-import com.dreis.rateestimatemanager.repository.RateRepository;
+import com.dreis.rateestimatemanager.service.RateService;
 import java.util.List;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-@RequestMapping("/rate")
+import org.springframework.web.bind.annotation.RestController;
 
 @Named
 @Scope(value = "session")
 @Component(value = "rateController")
+@RestController
+@RequestMapping("/rates")
 public class RateController {
 
     @Autowired
-    private RateRepository rateRepository;
+    private RateService rateService;
 
     @RequestMapping("/all") //TODO return dto
     private List<Rate> findAll() {
-        return rateRepository.findAll();
+        return rateService.findAll();
     }
 
     public void test() {
